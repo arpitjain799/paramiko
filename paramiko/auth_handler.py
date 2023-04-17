@@ -352,6 +352,9 @@ class AuthHandler:
                 raise AuthenticationException(err.format(key_type))
         else:
             # Fallback: first one in our (possibly tweaked by caller) list
+            # TODO: no!! check against key_type first!!!
+            # TODO: is there any way to pull some of this up to AuthStrategy,
+            # even if that just means injecting code from there down to here?
             pubkey_algo = my_algos[0]
             msg = "Server did not send a server-sig-algs list; defaulting to our first preferred algo ({!r})"  # noqa
             self._log(DEBUG, msg.format(pubkey_algo))
